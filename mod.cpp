@@ -1,10 +1,10 @@
-name = "Overthrow 0.7.7"; //This name will be displayed only in game , specifically the expansion menu
+name = "Zombiethrow pre-Alpha"; //This name will be displayed only in game , specifically the expansion menu
 picture = "logo_overthrow.paa"; //Location of your addon's icon
 logo = "logo_overthrow.paa";
 logoOver = "logo_overthrow.paa";
 actionName = "Website";   //The name of the action
 action = "http://armaoverthrow.com/"; //The action , "Authors Website Link"
-description = "Overthrow - Version 0.7.8"; // Addon Description
-overview = "A Revolution Simulator for Arma 3";
-author = "ARMAzac";
+description = "Based on Overthrow - Version 0.7.8"; // Addon Description
+overview = "A post-apocalyptic simulator";
+author = "ARMAzac, modified by PeZook";
 overviewPicture = "logo_overthrow.paa";
