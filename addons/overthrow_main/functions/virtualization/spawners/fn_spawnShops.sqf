@@ -34,7 +34,7 @@ if(count _activeshops > 0) exitWith {
 		_shopkeeper setVariable ["shop",format["%1",_pos],true];
 		_shopkeeper setVariable ["OT_shopCategory",_category,true];
 		_building setVariable ["OT_shopCategory",_category,true];
-		[_shopkeeper] call OT_fnc_initShopkeeper;
+		[_shopkeeper,_category] call OT_fnc_initShopkeeper;
 
 		//Put a light on
 		_light = "#lightpoint" createVehicle [_pos select 0,_pos select 1,(_pos select 2)+2.2];

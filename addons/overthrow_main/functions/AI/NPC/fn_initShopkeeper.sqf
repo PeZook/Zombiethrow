@@ -1,6 +1,7 @@
 private ["_unit"];
 
 _unit = _this select 0;
+_category = _this select 1;
 
 (group _unit) setVariable ["VCM_Disable",true];
 
@@ -21,6 +22,8 @@ removeHeadgear _unit;
 removeVest _unit;
 
 _unit forceAddUniform (OT_clothes_shops call BIS_fnc_selectRandom);
+
+if(_category isEqualTo "Pharmacy") then {_unit addVest "V_Plain_crystal_F"};
 
 [_unit,"self"] call OT_fnc_setOwner;
 
