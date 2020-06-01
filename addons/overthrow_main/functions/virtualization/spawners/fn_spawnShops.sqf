@@ -8,15 +8,22 @@ private _activeshops = server getVariable [format["activeshopsin%1",_town],[]];
 if(count _activeshops > 0) exitWith {
 	private _groups = [];
 
+ //Make an array of all trading post locations
+	_tradeposts = [allmapmarkers, {(getmarkertype _x) == "Empty"}] call BIS_fnc_conditionalselect
+	;
+
 	{
 		_x params ["_pos","_category"];
 		private _pos = _x select 0;
+		//Find the nearest trading post to the current store
+		_tradepost = [_tradeposts,_pos] call BIS_fnc_nearestPosition;
 		_building = nearestBuilding _pos;
 
 		private _group = createGroup civilian;
 		_group setBehaviour "CARELESS";
 		_groups pushback _group;
-		private _start = _building buildingPos 0;
+		//Replace building position with trade post position
+		private _start = getmarkerpos _tradepost;
 		_shopkeeper = _group createUnit [OT_civType_shopkeeper, _start, [],0, "NONE"];
 
 		private _tracked = _building call OT_fnc_spawnTemplate;
