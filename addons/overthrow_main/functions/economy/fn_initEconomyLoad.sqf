@@ -102,6 +102,23 @@ if(_version < OT_economyVersion) then {
     };
 }foreach(OT_allFactions);
 
+//Buildings destroyed in each town
+
+{
+  private _town = _x;
+  private _posTown = server getVariable _x;
+  private _allpos = [];
+  private _townbuildings = [];
+
+  private _dist = 600;
+  if(_town in OT_sprawling || _town in OT_capitals) then {_dist = 1000};
+
+  _townbuildings = (_posTown nearobjects ["Building",_dist]) - OT_spawnHouses;
+
+  {_x setdamage 1} foreach _townbuildings;
+
+  }foreach(OT_allTowns);
+
 //Stability markers
 {
     _stability = server getVariable format["stability%1",_x];
