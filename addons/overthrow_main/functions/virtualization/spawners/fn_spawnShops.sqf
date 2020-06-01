@@ -15,7 +15,7 @@ if(count _activeshops > 0) exitWith {
 	{
 		_x params ["_pos","_category"];
 		private _pos = _x select 0;
-		//Find the nearest trading post to the current store
+		//Find the trading post marker nearest to the current town
 		_tradepost = [_tradeposts,_pos] call BIS_fnc_nearestPosition;
 		_building = nearestBuilding _pos;
 
@@ -33,6 +33,8 @@ if(count _activeshops > 0) exitWith {
 		}foreach(_vehs);
 
 		_shopkeeper allowDamage false;
+		_shopkeeper setdir 180;
+		_shopkeeper setformdir 180;
 		_shopkeeper disableAI "MOVE";
 		_shopkeeper disableAI "AUTOCOMBAT";
 		_shopkeeper setVariable ["NOAI",true,false];
@@ -51,5 +53,12 @@ if(count _activeshops > 0) exitWith {
 		_groups pushback _light;
 		sleep 0.5;
 	}foreach(_activeshops);
+
+	//Spawn in the trading post
+
+//	private _tracked = "Trading_Post_Composition" call OT_fnc_spawnTemplate;
+
+_tp = [(getMarkerPos _tradepost), 0, call (compile (preprocessFileLineNumbers "overthrow_main\functions\virtualization\spawners\trade_post.sqf"))] call BIS_fnc_ObjectsMapper;
+
 	spawner setvariable [_spawnid,(spawner getvariable [_spawnid,[]]) + _groups,false];
 };

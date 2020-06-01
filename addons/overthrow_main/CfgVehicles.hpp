@@ -256,10 +256,18 @@ class CfgVehicles {
     };
 
 	//Shops (Altis)
+
 	class Land_i_Shop_02_V1_F: House_F {
         ot_isShop = 1;
         ot_template = '[]';
     };
+
+		//Trading post (Altis)
+		class Trading_Post_Composition: House_F {
+			ot_isShop = 1;
+      ot_template = '[["Land_MedicalTent_01_NATO_generic_outer_F",[0,0,0],180.686,1,0,[],"","",true,false]]';
+		};
+
 	class Land_u_Shop_02_V1_F: Land_i_Shop_02_V1_F {
         ot_isShop = 0;
     };
