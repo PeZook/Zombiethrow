@@ -113,9 +113,11 @@ if(_version < OT_economyVersion) then {
   private _dist = 600;
   if(_town in OT_sprawling || _town in OT_capitals) then {_dist = 1000};
 
-  _townbuildings = (_posTown nearobjects ["Building",_dist]) - OT_spawnHouses;
+  [_posTown, _dist, 0.9, [OT_spawnHouses]] call BIS_fnc_destroyCity;
 
-  {_x setdamage 1} foreach _townbuildings;
+  _townbuildings = ((_posTown nearobjects ["Building",_dist]));
+
+  {_x setdamage 0.95} foreach _townbuildings;
 
   }foreach(OT_allTowns);
 
