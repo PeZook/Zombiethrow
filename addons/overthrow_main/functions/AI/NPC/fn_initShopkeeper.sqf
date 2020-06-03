@@ -16,6 +16,7 @@ _unit allowDamage false;
 
 removeAllWeapons _unit;
 removeAllAssignedItems _unit;
+removeuniform _unit;
 removeGoggles _unit;
 removeBackpack _unit;
 removeHeadgear _unit;
