@@ -9,8 +9,7 @@ if(count _activeshops > 0) exitWith {
 	private _groups = [];
 
  //Make an array of all trading post locations
-	_tradeposts = [allmapmarkers, {(getmarkertype _x) == "Empty"}] call BIS_fnc_conditionalselect
-	;
+	_tradeposts = [allmapmarkers, {(getmarkertype _x) == "Empty"}] call BIS_fnc_conditionalselect;
 
 	{
 		_x params ["_pos","_category"];
@@ -22,8 +21,35 @@ if(count _activeshops > 0) exitWith {
 		private _group = createGroup civilian;
 		_group setBehaviour "CARELESS";
 		_groups pushback _group;
-		//Replace building position with trade post position
+
+		//Distribute shopkeepers to correct positions in the trade post
 		private _start = getmarkerpos _tradepost;
+
+		if (_category == "General") then
+			{
+				_tp = [(getMarkerPos _tradepost), 180, call (compile (preprocessFileLineNumbers "overthrow_main\functions\virtualization\spawners\trade_post.sqf"))] call BIS_fnc_ObjectsMapper;
+				_start = [(getmarkerpos _tradepost), 7.88553, 166] call BIS_fnc_relPos;
+			};
+
+		if (_category == "Surplus") then
+				{
+					_start = [(getmarkerpos _tradepost), 1.92187, 302] call BIS_fnc_relPos;
+				};
+
+		if (_category == "Electronics") then
+						{
+							_start = [(getmarkerpos _tradepost), 2.11956, 57] call BIS_fnc_relPos;
+						};
+
+		if (_category == "Pharmacy") then
+						{
+							_start = [(getmarkerpos _tradepost), 4.46949, 204] call BIS_fnc_relPos;
+						};
+		if (_category == "Clothing") then
+						{
+							_start = [(getmarkerpos _tradepost), 3.4005, 135] call BIS_fnc_relPos;
+						};
+
 		_shopkeeper = _group createUnit [OT_civType_shopkeeper, _start, [],0, "NONE"];
 
 //		private _tracked = _building call OT_fnc_spawnTemplate;
@@ -56,9 +82,7 @@ if(count _activeshops > 0) exitWith {
 
 	//Spawn in the trading post
 
-//	private _tracked = "Trading_Post_Composition" call OT_fnc_spawnTemplate;
 
-_tp = [(getMarkerPos _tradepost), 0, call (compile (preprocessFileLineNumbers "overthrow_main\functions\virtualization\spawners\trade_post.sqf"))] call BIS_fnc_ObjectsMapper;
 
 	spawner setvariable [_spawnid,(spawner getvariable [_spawnid,[]]) + _groups,false];
 };
