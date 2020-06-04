@@ -90,9 +90,9 @@ if(count _activeshops > 0) exitWith {
 	_groups pushback _postobjects;
 }foreach(_tp);
 
-//	_groups pushback _tp;
-
-	 copyToClipboard str _groups;
+//Debugging command
+//	 copyToClipboard str _groups;
+//End debugging
 
 	spawner setvariable [_spawnid,(spawner getvariable [_spawnid,[]]) + _groups,false];
 };
