@@ -42,18 +42,18 @@ if(_category isEqualTo "Surplus") then
 
 if(_category isEqualTo "Pharmacy") then
   {
-    _units forceAddUniform "U_C_Paramedic_01_F";
+    _unit forceAddUniform "U_C_Paramedic_01_F";
     _unit addVest "V_Plain_crystal_F";
   };
 
 if(_category isEqualTo "Electronics") then
     {
-      _units forceAddUniform "CUP_U_C_Worker_02";
+      _unit forceAddUniform "CUP_U_C_Worker_02";
     };
 
 if(_category isEqualTo "Clothing") then
     {
-      _units forceAddUniform "U_C_Man_casual_1_F";
+      _unit forceAddUniform "U_C_Man_casual_1_F";
       _unit addBackpack "B_Messenger_IDAP_F";
     };
 
