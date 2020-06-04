@@ -81,7 +81,8 @@ if(count _activeshops > 0) exitWith {
 	}foreach(_activeshops);
 
 	//Spawn in the trading post
-	_tradepost = [_tradeposts,_pos] call BIS_fnc_nearestPosition;
+	private _posTown = server getVariable _town;
+	_tradepost = [_tradeposts,_posTown] call BIS_fnc_nearestPosition;
 	_tp = [(getMarkerPos _tradepost), 180, call (compile (preprocessFileLineNumbers "overthrow_main\functions\virtualization\spawners\trade_post.sqf"))] call BIS_fnc_ObjectsMapper;
 
 //_tp variable needs to be scrubbed of square brackets before pushing to spawner, which is done by this snippet
