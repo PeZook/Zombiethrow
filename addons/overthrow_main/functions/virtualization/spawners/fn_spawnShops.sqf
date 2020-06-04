@@ -27,7 +27,6 @@ if(count _activeshops > 0) exitWith {
 
 		if (_category == "General") then
 			{
-				_tp = [(getMarkerPos _tradepost), 180, call (compile (preprocessFileLineNumbers "overthrow_main\functions\virtualization\spawners\trade_post.sqf"))] call BIS_fnc_ObjectsMapper;
 				_start = [(getmarkerpos _tradepost), 7.88553, 166] call BIS_fnc_relPos;
 			};
 
@@ -52,7 +51,8 @@ if(count _activeshops > 0) exitWith {
 
 		_shopkeeper = _group createUnit [OT_civType_shopkeeper, _start, [],0, "NONE"];
 
-//		private _tracked = _building call OT_fnc_spawnTemplate;
+		private _tracked = _building call OT_fnc_spawnTemplate;
+
 		private _vehs = _tracked select 0;
 		{
 			_groups pushback _x;
@@ -81,8 +81,18 @@ if(count _activeshops > 0) exitWith {
 	}foreach(_activeshops);
 
 	//Spawn in the trading post
+	_tradepost = [_tradeposts,_pos] call BIS_fnc_nearestPosition;
+	_tp = [(getMarkerPos _tradepost), 180, call (compile (preprocessFileLineNumbers "overthrow_main\functions\virtualization\spawners\trade_post.sqf"))] call BIS_fnc_ObjectsMapper;
 
+//_tp variable needs to be scrubbed of square brackets before pushing to spawner, which is done by this snippet
+{
+	private _postobjects = _tp select _foreachindex;
+	_groups pushback _postobjects;
+}foreach(_tp);
 
+//	_groups pushback _tp;
+
+	 copyToClipboard str _groups;
 
 	spawner setvariable [_spawnid,(spawner getvariable [_spawnid,[]]) + _groups,false];
 };
